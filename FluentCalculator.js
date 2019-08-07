@@ -1,4 +1,5 @@
 export default class FluentCalculator {
+  
   constructor(number) {
     if (!number) {
       this.number = 0;
@@ -6,37 +7,29 @@ export default class FluentCalculator {
       this.number = number;
     }
   }
-
+  
   equals() {
     return this.number;
   }
 
   plus(value) {
-    if (!this.number) {
-      return this;
-    }
-    return (this.number = this.number + value);
+    this.number = this.number + value;
+    return this;
   }
 
   minus(value) {
-    if (!this.number) {
-      return this;
-    }
     this.number = this.number - value;
+    return this;
   }
 
   times(value) {
-    if (!this.number) {
-      return this;
-    }
     this.number = this.number * value;
+    return this;
   }
 
   dividedBy(value) {
-    if (!this.number) {
-      return this;
-    }
     this.number = this.number / value;
+    return this;
   }
 }
 
