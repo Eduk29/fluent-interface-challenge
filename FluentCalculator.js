@@ -1,38 +1,45 @@
-export default class FluentCalculator {
-  
-  constructor(number) {
-    if (!number) {
-      this.number = 0;
-    } else {
-      this.number = number;
-    }
-  }
-  
-  equals() {
-    return this.number;
-  }
+const plus = (acc, value) => {
+  return acc + value;
+};
 
+const minus = (acc, value) => {
+  return acc - value;
+};
+
+const times = (acc, value) => {
+  return acc * value;
+};
+
+const dividedBy = (acc, value) => {
+  return acc / value;
+};
+
+const fluentCalculator = number => ({
   plus(value) {
-    this.number = this.number + value;
-    return this;
-  }
+    return fluentCalculator(plus(number, value));
+  },
 
   minus(value) {
-    this.number = this.number - value;
-    return this;
-  }
+    return fluentCalculator(minus(number, value));
+  },
 
   times(value) {
-    this.number = this.number * value;
-    return this;
-  }
+    return fluentCalculator(times(number, value));
+  },
 
   dividedBy(value) {
-    this.number = this.number / value;
-    return this;
-  }
-}
+    return fluentCalculator(dividedBy(number, value));
+  },
 
-export function createCalculator(number) {
-  return new FluentCalculator(number);
-}
+  equals() {
+    return number;
+  }
+});
+
+export const createCalculator = number => {
+  if (!number) {
+    number = 0;
+  }
+
+  return fluentCalculator(number);
+};
